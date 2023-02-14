@@ -1,4 +1,4 @@
-name: Testim E2E
+name: Testim E2E Tests
 on: [push]
 
 jobs:

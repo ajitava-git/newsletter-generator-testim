@@ -14,4 +14,4 @@ jobs:
           with:
             node-version: '16.13.0'
         - run: npm install -g @testim/testim-cli
-        - run: testim --token "CcQXcwCHUJ7q2Ffvo52qa5Vyxc19ambY4vDns1rxAewjl6vll8" --project "eeaq63KWXYQMYyAu6gZn" --grid "Testim-Grid" --suite "End to End Test"
+        - run: testim --token "${{ secrets.TOKEN }}" --project "eeaq63KWXYQMYyAu6gZn" --grid "Testim-Grid" --suite "End to End Test"

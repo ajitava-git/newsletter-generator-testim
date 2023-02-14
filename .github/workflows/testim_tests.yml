@@ -7,11 +7,14 @@ jobs:
         steps:
         - name: Set environment variable
           run: echo "TOKEN=${{ secrets.TOKEN }}"
+        - name: Set environment variable
+          run: echo "TOKEN=${{ secrets.PROJECT_ID }}"
           env:
             TOKEN: ${{ secrets.TOKEN }}
+            PROJECT_ID: ${{ secrets.PROJECT_ID }}
         - uses: actions/checkout@v2
         - uses: actions/setup-node@v2
           with:
             node-version: '16.13.0'
         - run: npm install -g @testim/testim-cli
-        - run: testim --token TOKEN --project "eeaq63KWXYQMYyAu6gZn" --grid "Testim-Grid" --suite "End to End Test"
+        - run: testim --token "${{ secrets.TOKEN }}" --project "${{ secrets.PROJECT_ID }}" --grid "Testim-Grid" --suite "End to End Test"

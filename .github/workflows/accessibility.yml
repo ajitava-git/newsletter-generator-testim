@@ -1,0 +1,45 @@
+name: Accessibility Testing
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  accessibility:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Axe DevTools Locally
+        run: npm install axe-core
+
+      - name: Run Accessibility Tests
+        run: |
+          # Run Axe accessibility tests on your web app (replace URL)
+          npx axe https://twitter.com/explore --save ./axe-results.json
+        env:
+          AXE_DEVTOOLS_RESULTS_DIR: ./axe-results.json
+
+      - name: Upload Axe DevTools Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: axe-results
+          path: ./axe-results.json
+
+      - name: Fail Workflow on Accessibility Issues
+        run: |
+          # Fail the workflow if accessibility issues are found
+          npx axe-report --results ./axe-results.json
+        continue-on-error: true

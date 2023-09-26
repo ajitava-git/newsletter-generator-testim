@@ -22,10 +22,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install Axe DevTools
-        run: npm install axe-core -g  # Install axe-core globally
-        # If it still doesn't work, try specifying the path:
-        # run: npm install -g axe-core
+      - name: Install Axe DevTools Locally
+        run: npm install axe-core
 
       - name: Run Accessibility Tests
         run: |
